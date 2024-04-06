@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Random Group Assignment</title>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Random Group Assignment</h1>
+		<label for="numGroups">Number of Groups:</label>
+		<input type="number" id="numGroups" min="1" value="1" />
+		<button onclick="assignGroups()">Assign Groups</button>
+
+		<h2>People</h2>
+		<textarea id="peopleList" rows="5" cols="50">
+Person 1
+Person 2
+Person 3
+Person 4
+Person 5
+    </textarea
+		>
+		<h2>Group Assignment</h2>
+		<div id="groupResult"></div>
+
+		<script>
+			function assignGroups() {
+				const numGroups = parseInt(
+					document.getElementById("numGroups").value
+				);
+				const peopleInput = document
+					.getElementById("peopleList")
+					.value.trim();
+				const peopleArray = peopleInput.split(" ").filter(Boolean); // Filter out empty lines
+
+				const shuffledPeople = shuffleArray(peopleArray);
+				const groupSize = Math.ceil(shuffledPeople.length / numGroups);
+
+				let groupResultHTML = "";
+
+				for (let i = 0; i < numGroups; i++) {
+					groupResultHTML += `<h3>Group ${i + 1}</h3>`;
+					groupResultHTML += "<ul>";
+
+					const groupMembers = shuffledPeople.slice(
+						i * groupSize,
+						(i + 1) * groupSize
+					);
+					groupMembers.forEach((person) => {
+						groupResultHTML += `<li>${person}</li>`;
+					});
+
+					groupResultHTML += "</ul>";
+				}
+
+				document.getElementById("groupResult").innerHTML =
+					groupResultHTML;
+			}
+
+			function shuffleArray(array) {
+				for (let i = array.length - 1; i > 0; i--) {
+					const j = Math.floor(Math.random() * (i + 1));
+					[array[i], array[j]] = [array[j], array[i]];
+				}
+				return array;
+			}
+		</script>
+	</body>
+</html>
+
+<!--  Chris Michelle Paul Stephen ZhangMing Yuxin 大姐 Sophie Eric Gavin Hanqi Sam
+Xiangyu Ivy Yutong Jin Chen Rong GuHeng SaiYu  -->
